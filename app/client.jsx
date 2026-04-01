@@ -3,7 +3,7 @@ import { useState } from "react";
 
 export default function KBJunkRemovalWebsiteClient() {
   const [submitted, setSubmitted] = useState(false);
-
+ 
   return (
     <div style={{ fontFamily: "Arial, sans-serif", padding: "20px", background: "#111", color: "white", minHeight: "100vh" }}>
       <h1 style={{ color: "#facc15", fontSize: "40px" }}>KB Junk Removal</h1>
