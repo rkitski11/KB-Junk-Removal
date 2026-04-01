@@ -155,18 +155,62 @@ export default function KBJunkRemovalWebsiteClient() {
         <div style={heroStyle}>
           <div style={heroLeftStyle}>
             <div style={badgeStyle}>Serving Washington County</div>
-            <h1 style={{ color: "#facc15", fontSize: "58px", margin: "0 0 12px", fontWeight: 900, lineHeight: 1 }}>
-              KB Junk Removal
-            </h1>
-            <h2 style={{ margin: "0 0 18px", fontSize: "34px", lineHeight: 1.2 }}>
-              <span style={{ color: "#facc15" }}>Reliable Junk Removal Services</span>{" "}
-              <span style={{ color: "white" }}>You Can Trust</span>
+            <div style={{ position: "relative", marginBottom: "22px", paddingRight: "170px", minHeight: "140px" }}>
+              <div
+                style={{
+                  position: "absolute",
+                  right: "0",
+                  top: "-10px",
+                  width: "150px",
+                  height: "150px",
+                  borderRadius: "999px",
+                  background: "radial-gradient(circle, rgba(250,204,21,0.26) 0%, rgba(250,204,21,0.14) 38%, rgba(250,204,21,0.04) 58%, rgba(250,204,21,0) 76%)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  boxShadow: "0 0 42px rgba(250,204,21,0.14)",
+                  zIndex: 0,
+                }}
+              >
+                <img
+                  src="/logo.png"
+                  alt="KB Junk Removal Logo"
+                  style={{
+                    width: "122px",
+                    height: "122px",
+                    objectFit: "contain",
+                    borderRadius: "999px",
+                    filter: "drop-shadow(0 10px 24px rgba(0,0,0,0.35))",
+                    opacity: 0.98,
+                  }}
+                />
+              </div>
+
+              <h1
+                style={{
+                  color: "#facc15",
+                  fontSize: "64px",
+                  margin: 0,
+                  fontWeight: 900,
+                  lineHeight: 0.98,
+                  position: "relative",
+                  zIndex: 1,
+                  maxWidth: "760px",
+                  textShadow: "0 4px 18px rgba(0,0,0,0.22)",
+                }}
+              >
+                KB Junk Removal
+              </h1>
+            </div>
+            <h2 style={{ margin: "0 0 16px", fontSize: "32px", lineHeight: 1.3, textAlign: "left", maxWidth: "760px" }}>
+              <span style={{ color: "#facc15" }}>Reliable Junk Removal Services</span><br />
+              <span style={{ color: "white", display: "inline-block", marginTop: "2px" }}>You Can Trust</span>
             </h2>
-            <p style={{ color: "#d4d4d8", fontSize: "18px", lineHeight: 1.7, maxWidth: "720px", marginBottom: "26px" }}>
-              Fast, affordable, and dependable junk removal for homes, garages, properties, and cleanup jobs throughout Washington County.
+            <p style={{ color: "#d4d4d8", fontSize: "17px", lineHeight: 1.7, maxWidth: "620px", marginBottom: "24px", textAlign: "left" }}>
+              Fast, affordable, and dependable junk removal for homes, garages, and properties across Washington County.
             </p>
 
-            <div style={{ display: "flex", gap: "14px", flexWrap: "wrap" }}>
+            <div style={{ display: "flex", gap: "14px", flexWrap: "wrap", alignItems: "center", marginTop: "4px" }}>
               <a
                 href="tel:6183675815"
                 style={{
@@ -195,6 +239,19 @@ export default function KBJunkRemovalWebsiteClient() {
                 }}
               >
                 Visit Our Facebook
+              </a>
+              <a
+                href="https://www.facebook.com/share/1ArxuPRrLf/?mibextid=wwXIfr"
+                target="_blank"
+                rel="noreferrer"
+                style={{
+                  color: "#93c5fd",
+                  fontWeight: 700,
+                  textDecoration: "none",
+                  padding: "10px 4px",
+                }}
+              >
+                Follow us for updates
               </a>
             </div>
           </div>
@@ -251,7 +308,7 @@ export default function KBJunkRemovalWebsiteClient() {
             <div style={badgeStyle}>Free Quote Request</div>
             <h2 style={sectionTitleStyle}>Get a fast junk removal quote</h2>
             <p style={{ ...sectionTextStyle, maxWidth: "520px" }}>
-              Let customers choose the kind of cleanup they need, leave their contact info, and send over job details in a clean, easy form.
+              Serving Washington County, IL — fast, reliable, and local junk removal you can count on.
             </p>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "14px", marginTop: "20px" }}>
               {[
@@ -323,7 +380,18 @@ export default function KBJunkRemovalWebsiteClient() {
             )}
           </div>
         </section>
+
+        <footer style={{ marginTop: "50px", borderTop: "1px solid #27272a", paddingTop: "20px", textAlign: "center", color: "#a1a1aa" }}>
+          <p style={{ marginBottom: "10px", fontWeight: 700 }}>Serving Washington County, IL</p>
+          <div style={{ marginBottom: "10px" }}>
+            <a href="https://www.facebook.com/share/1ArxuPRrLf/?mibextid=wwXIfr" target="_blank" rel="noreferrer" style={{ color: "#3b82f6", marginRight: "10px" }}>Facebook</a>
+            <a href="https://www.facebook.com/share/1ArxuPRrLf/?mibextid=wwXIfr" target="_blank" rel="noreferrer" style={{ color: "#3b82f6" }}>Follow Us</a>
+          </div>
+          <p style={{ fontSize: "14px" }}>© {new Date().getFullYear()} KB Junk Removal. All rights reserved.</p>
+          <p style={{ fontSize: "13px", marginTop: "8px" }}>Reliable junk removal services in Washington County, Illinois.</p>
+        </footer>
       </div>
     </div>
   );
 }
+
