@@ -1,8 +1,6 @@
 'use client';
 import { useState } from "react";
 
-export default function KBJunkRemovalWebsite() {import { useState } from "react";
-
 export default function KBJunkRemovalWebsite() {
   const services = [
     "Yard Waste",
