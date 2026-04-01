@@ -1,5 +1,5 @@
-import KBJunkRemovalWebsiteClient from "./KBJunkRemovalWebsiteClient";
+import Client from "./client";
 
 export default function Page() {
-  return <KBJunkRemovalWebsiteClient />;
+  return <Client />;
 }
