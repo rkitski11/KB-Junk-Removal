@@ -173,7 +173,7 @@ export default function KBJunkRemovalWebsiteClient() {
                 }}
               >
                 <img
-                  src="/logo.png"
+                  src="/logo1.png"
                   alt="KB Junk Removal Logo"
                   style={{
                     width: "122px",
