@@ -10,7 +10,8 @@
     "react-dom": "18.2.0",
     "resend": "^4.0.0",
     "@vercel/analytics":"latest",
-    "@vercel/speed-insights":"latest"
+    "@vercel/speed-insights":"latest",
+    "cloudinary":"^2.5.0"
   }
 }
 
