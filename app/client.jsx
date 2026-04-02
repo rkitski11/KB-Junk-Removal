@@ -349,25 +349,13 @@ onSubmit={async (e) => {
   const form = e.currentTarget;
   const formData = new FormData(form);
 
-  const payload = {
-    name: formData.get("name"),
-    phone: formData.get("phone"),
-    services: formData.getAll("services"),
-    otherDetails: formData.get("otherDetails"),
-    details: formData.get("details"),
-    contactMethod: formData.get("contactMethod"),
-    bestTime: formData.get("bestTime"),
-  };
-
   try {
-const formData = new FormData(e.target);
+    const res = await fetch("/api/quote-request", {
+      method: "POST",
+      body: formData,
+    });
 
-const res = await fetch("/api/quote-request", {
-  method: "POST",
-  body: formData,
-});
-
-const data = await res.json();
+    const data = await res.json();
 
     if (!res.ok) {
       throw new Error(data.error || "Failed to send request.");
