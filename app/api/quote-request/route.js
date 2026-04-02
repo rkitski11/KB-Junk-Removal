@@ -11,17 +11,17 @@ export async function POST(req) {
   try {
     const resend = new Resend(process.env.RESEND_API_KEY);
 
-    const body = await req.json();
+ const formData = await req.formData();
 
-    const {
-      name,
-      phone,
-      services,
-      otherDetails,
-      details,
-      contactMethod,
-      bestTime,
-    } = body;
+const name = formData.get("name");
+const phone = formData.get("phone");
+const services = formData.getAll("services");
+const otherDetails = formData.get("otherDetails");
+const details = formData.get("details");
+const contactMethod = formData.get("contactMethod");
+const bestTime = formData.get("bestTime");
+
+const files = formData.getAll("photos");
 
     if (!name || !phone) {
       return Response.json(
