@@ -1,5 +1,5 @@
 import { Analytics } from '@vercel/analytics/next';
-
+import { SpeedInsights } from '@vercel/speed-insights/next';
  export const metadata = {
   title: "KB Junk Removal",
   description: "Junk removal services in Washington County",
@@ -14,6 +14,7 @@ export default function RootLayout({ children }) {
       <body>
         {children}
         <Analytics />
+       <SpeedInsights />
       </body>
     </html>
   );
