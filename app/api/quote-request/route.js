@@ -1,5 +1,7 @@
 import { Resend } from "resend";
 
+const resend = new Resend(process.env.RESEND_API_KEY);
+
 function formatServices(services) {
   if (!Array.isArray(services) || services.length === 0) {
     return "None selected";
@@ -42,16 +44,6 @@ export async function POST(req) {
         <p><strong>Best Time:</strong> ${bestTime || "N/A"}</p>
       </div>
     `;
-
-    const smsBody =
-      `New KB Junk Removal quote request\n` +
-      `Name: ${name}\n` +
-      `Phone: ${phone}\n` +
-      `Services: ${serviceList}\n` +
-      `Other: ${otherDetails || "N/A"}\n` +
-      `Details: ${details || "N/A"}\n` +
-      `Contact: ${contactMethod || "N/A"}\n` +
-      `Best time: ${bestTime || "N/A"}`;
 
     await resend.emails.send({
       from: process.env.RESEND_FROM_EMAIL,
