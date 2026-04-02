@@ -1,57 +1,11 @@
 "use client";
 import { useState } from "react";
 
-    async function handleSubmit(e) {
-  e.preventDefault();
-  setIsSubmitting(true);
-  setMessage("");
-
-  const form = e.currentTarget;
-  const formData = new FormData(form);
-
-  const payload = {
-    name: formData.get("name"),
-    phone: formData.get("phone"),
-    services: formData.getAll("services"),
-    otherDetails: formData.get("otherDetails"),
-    details: formData.get("details"),
-    contactMethod: formData.get("contactMethod"),
-    bestTime: formData.get("bestTime"),
-  };
-
-  try {
-    const res = await fetch("/api/quote-request", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-    });
-
-    const data = await res.json();
-
-    if (!res.ok) {
-      throw new Error(data.error || "Something went wrong while sending your request.");
-    }
-
-    setSubmitted(true);
-    setMessage(
-      data.message ||
-        "Thank you for your request! We appreciate your business and will be in touch with you shortly."
-    );
-    form.reset();
-  } catch (err) {
-    setMessage(err.message || "Something went wrong while sending your request.");
-  } finally {
-    setIsSubmitting(false);
-  }
-}
-
 export default function KBJunkRemovalWebsiteClient() {
 const [submitted, setSubmitted] = useState(false);
 const [isSubmitting, setIsSubmitting] = useState(false);
 const [message, setMessage] = useState("");
-
+    
   const services = [
     "Yard Waste",
     "Furniture Removal",
