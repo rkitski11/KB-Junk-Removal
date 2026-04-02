@@ -331,35 +331,49 @@ const [message, setMessage] = useState("");
             </p>
 
         <form
-  onSubmit={async (e) => {
-    e.preventDefault();
+onSubmit={async (e) => {
+  e.preventDefault();
+  setIsSubmitting(true);
+  setMessage("");
 
-    const form = e.currentTarget;
-    const formData = new FormData(form);
+  const form = e.currentTarget;
+  const formData = new FormData(form);
 
-    const payload = {
-      name: formData.get("name"),
-      phone: formData.get("phone"),
-      services: formData.getAll("services"),
-      otherDetails: formData.get("otherDetails"),
-      details: formData.get("details"),
-      contactMethod: formData.get("contactMethod"),
-      bestTime: formData.get("bestTime"),
-    };
+  const payload = {
+    name: formData.get("name"),
+    phone: formData.get("phone"),
+    services: formData.getAll("services"),
+    otherDetails: formData.get("otherDetails"),
+    details: formData.get("details"),
+    contactMethod: formData.get("contactMethod"),
+    bestTime: formData.get("bestTime"),
+  };
 
-    try {
-      await fetch("/api/quote-request", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
+  try {
+    const res = await fetch("/api/quote-request", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
 
-      setSubmitted(true);
-      form.reset();
-    } catch {
-      alert("Failed to send request.");
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new Error(data.error || "Failed to send request.");
     }
-  }}
+
+    setSubmitted(true);
+    setMessage(
+      data.message ||
+        "Thank you for your request! We appreciate your business and will be in touch with you shortly."
+    );
+    form.reset();
+  } catch (err) {
+    setMessage(err.message || "Failed to send request.");
+  } finally {
+    setIsSubmitting(false);
+  }
+}}
   style={{ display: "flex", flexDirection: "column", gap: "16px" }}
 >
   <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "14px" }}>
