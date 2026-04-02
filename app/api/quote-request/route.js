@@ -1,12 +1,4 @@
 import { Resend } from "resend";
-import twilio from "twilio";
-  
-const resend = new Resend(process.env.RESEND_API_KEY);
-
-const twilioClient = twilio(
-  process.env.TWILIO_ACCOUNT_SID,
-  process.env.TWILIO_AUTH_TOKEN
-);
 
 function formatServices(services) {
   if (!Array.isArray(services) || services.length === 0) {
@@ -67,12 +59,6 @@ export async function POST(req) {
       subject: `New Quote Request from ${name}`,
       html: emailHtml,
       reply_to: "rkitski11@gmail.com",
-    });
-
-    await twilioClient.messages.create({
-      body: smsBody,
-      from: process.env.TWILIO_FROM_NUMBER,
-      to: "+16183675815",
     });
 
     return Response.json({
