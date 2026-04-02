@@ -9,7 +9,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "resend": "^4.0.0",
-    "twilio": "^5.0.0"
+    "@vercel/analytics":"latest"
   }
 }
 
