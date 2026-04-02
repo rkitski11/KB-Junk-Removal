@@ -138,7 +138,6 @@ const [message, setMessage] = useState("");
     fontSize: "15px",
   };
 
-  const buttonStyle = {
     async function handleSubmit(e) {
   e.preventDefault();
   setIsSubmitting(true);
@@ -184,6 +183,7 @@ const [message, setMessage] = useState("");
     setIsSubmitting(false);
   }
 }
+   const buttonStyle = {
     width: "100%",
     background: "#facc15",
     color: "black",
