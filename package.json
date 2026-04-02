@@ -9,7 +9,8 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "resend": "^4.0.0",
-    "@vercel/analytics":"latest"
+    "@vercel/analytics":"latest",
+    "@vercel/speed-insights":"latest"
   }
 }
 
