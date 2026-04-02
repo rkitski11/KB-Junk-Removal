@@ -2,7 +2,9 @@
 import { useState } from "react";
 
 export default function KBJunkRemovalWebsiteClient() {
-  const [submitted, setSubmitted] = useState(false);
+const [submitted, setSubmitted] = useState(false);
+const [isSubmitting, setIsSubmitting] = useState(false);
+const [message, setMessage] = useState("");
 
   const services = [
     "Yard Waste",
@@ -137,6 +139,51 @@ export default function KBJunkRemovalWebsiteClient() {
   };
 
   const buttonStyle = {
+    async function handleSubmit(e) {
+  e.preventDefault();
+  setIsSubmitting(true);
+  setMessage("");
+
+  const form = e.currentTarget;
+  const formData = new FormData(form);
+
+  const payload = {
+    name: formData.get("name"),
+    phone: formData.get("phone"),
+    services: formData.getAll("services"),
+    otherDetails: formData.get("otherDetails"),
+    details: formData.get("details"),
+    contactMethod: formData.get("contactMethod"),
+    bestTime: formData.get("bestTime"),
+  };
+
+  try {
+    const res = await fetch("/api/quote-request", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new Error(data.error || "Something went wrong while sending your request.");
+    }
+
+    setSubmitted(true);
+    setMessage(
+      data.message ||
+        "Thank you for your request! We appreciate your business and will be in touch with you shortly."
+    );
+    form.reset();
+  } catch (err) {
+    setMessage(err.message || "Something went wrong while sending your request.");
+  } finally {
+    setIsSubmitting(false);
+  }
+}
     width: "100%",
     background: "#facc15",
     color: "black",
@@ -328,55 +375,154 @@ export default function KBJunkRemovalWebsiteClient() {
               Select the services you need and send over a few details.
             </p>
 
-            {submitted ? (
-              <div style={{ background: "rgba(250,204,21,0.1)", border: "1px solid rgba(250,204,21,0.25)", color: "#fef08a", borderRadius: "18px", padding: "16px 18px", fontWeight: 700 }}>
-                Thank you for your request! We appreciate your business and will be in touch with you shortly.
-              </div>
-            ) : (
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  setSubmitted(true);
-                }}
-                style={{ display: "flex", flexDirection: "column", gap: "16px" }}
-              >
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "14px" }}>
-                  <input placeholder="Name" required style={inputStyle} />
-                  <input placeholder="Phone" required style={inputStyle} />
-                </div>
+        <form
+  onSubmit={async (e) => {
+    e.preventDefault();
 
-                <div>
-                  <div style={{ fontWeight: 700, marginBottom: "10px", color: "#e4e4e7" }}>What do you need removed?</div>
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px" }}>
-                    {quoteOptions.map((item) => (
-                      <label key={item} style={{ display: "flex", alignItems: "center", gap: "10px", background: "#0b0b0b", border: "1px solid #27272a", borderRadius: "14px", padding: "12px 14px" }}>
-                        <input type="checkbox" />
-                        <span>{item}</span>
-                      </label>
-                    ))}
-                  </div>
-                </div>
+    const form = e.currentTarget;
+    const formData = new FormData(form);
 
-                <input placeholder="If other, please specify..." style={inputStyle} />
-                <textarea placeholder="Project details" rows={5} style={{ ...inputStyle, resize: "vertical" }} />
+    const payload = {
+      name: formData.get("name"),
+      phone: formData.get("phone"),
+      services: formData.getAll("services"),
+      otherDetails: formData.get("otherDetails"),
+      details: formData.get("details"),
+      contactMethod: formData.get("contactMethod"),
+      bestTime: formData.get("bestTime"),
+    };
 
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "14px" }}>
-                  <select style={inputStyle} defaultValue="">
-                    <option value="" disabled>Preferred contact</option>
-                    <option>Call me</option>
-                    <option>Text me</option>
-                    <option>Either is fine</option>
-                  </select>
-                  <input placeholder="Best time to reach you" style={inputStyle} />
-                </div>
+    try {
+      await fetch("/api/quote-request", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
 
-                <div>
-                  <div style={{ fontWeight: 700, marginBottom: "10px", color: "#e4e4e7" }}>Upload photos (optional)</div>
-                  <input type="file" multiple accept="image/*" style={{ ...inputStyle, padding: "12px" }} />
-                </div>
+      setSubmitted(true);
+      form.reset();
+    } catch {
+      alert("Failed to send request.");
+    }
+  }}
+  style={{ display: "flex", flexDirection: "column", gap: "16px" }}
+>
+  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "14px" }}>
+    <input
+      name="name"
+      placeholder="Name"
+      required
+      style={inputStyle}
+    />
+    <input
+      name="phone"
+      placeholder="Phone"
+      required
+      style={inputStyle}
+    />
+  </div>
 
-                <button type="submit" style={buttonStyle}>Submit Quote Request</button>
-              </form>
+  <div>
+    <div style={{ fontWeight: 700, marginBottom: "10px", color: "#e4e4e7" }}>
+      What do you need removed?
+    </div>
+    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px" }}>
+      {quoteOptions.map((item) => (
+        <label
+          key={item}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "10px",
+            background: "#0b0b0b",
+            border: "1px solid #27272a",
+            borderRadius: "14px",
+            padding: "12px 14px",
+          }}
+        >
+          <input type="checkbox" name="services" value={item} />
+          <span>{item}</span>
+        </label>
+      ))}
+    </div>
+  </div>
+
+  <input
+    name="otherDetails"
+    placeholder="If other, please specify..."
+    style={inputStyle}
+  />
+
+  <textarea
+    name="details"
+    placeholder="Project details"
+    rows={5}
+    style={{ ...inputStyle, resize: "vertical" }}
+  />
+
+  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "14px" }}>
+    <select
+      name="contactMethod"
+      style={inputStyle}
+      defaultValue=""
+    >
+      <option value="" disabled>
+        Preferred contact
+      </option>
+      <option>Call me</option>
+      <option>Text me</option>
+      <option>Either is fine</option>
+    </select>
+
+    <input
+      name="bestTime"
+      placeholder="Best time to reach you"
+      style={inputStyle}
+    />
+  </div>
+
+  <div>
+    <div style={{ fontWeight: 700, marginBottom: "10px", color: "#e4e4e7" }}>
+      Upload photos (optional)
+    </div>
+    <input
+      name="photos"
+      type="file"
+      multiple
+      accept="image/*"
+      style={{ ...inputStyle, padding: "12px" }}
+    />
+  </div>
+
+  {message ? (
+    <div
+      style={{
+        background: submitted ? "rgba(250,204,21,0.1)" : "rgba(239,68,68,0.1)",
+        border: submitted
+          ? "1px solid rgba(250,204,21,0.25)"
+          : "1px solid rgba(239,68,68,0.25)",
+        color: submitted ? "#fef08a" : "#fca5a5",
+        borderRadius: "18px",
+        padding: "16px 18px",
+        fontWeight: 700,
+      }}
+    >
+      {message}
+    </div>
+  ) : null}
+
+  <button
+    type="submit"
+    disabled={isSubmitting}
+    style={{
+      ...buttonStyle,
+      opacity: isSubmitting ? 0.7 : 1,
+      cursor: isSubmitting ? "not-allowed" : "pointer",
+    }}
+  >
+    {isSubmitting ? "Sending..." : "Submit Quote Request"}
+  </button>
+</form> 
             )}
           </div>
         </section>
