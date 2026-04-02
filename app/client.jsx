@@ -350,13 +350,14 @@ onSubmit={async (e) => {
   };
 
   try {
-    const res = await fetch("/api/quote-request", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
+const formData = new FormData(e.target);
 
-    const data = await res.json();
+const res = await fetch("/api/quote-request", {
+  method: "POST",
+  body: formData,
+});
+
+const data = await res.json();
 
     if (!res.ok) {
       throw new Error(data.error || "Failed to send request.");
