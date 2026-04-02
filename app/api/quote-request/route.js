@@ -1,7 +1,5 @@
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 function formatServices(services) {
   if (!Array.isArray(services) || services.length === 0) {
     return "None selected";
@@ -11,6 +9,8 @@ function formatServices(services) {
 
 export async function POST(req) {
   try {
+    const resend = new Resend(process.env.RESEND_API_KEY);
+
     const body = await req.json();
 
     const {
