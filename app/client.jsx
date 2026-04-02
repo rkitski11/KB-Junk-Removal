@@ -1,11 +1,21 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
  
 export default function KBJunkRemovalWebsiteClient() {
 const [submitted, setSubmitted] = useState(false);
 const [isSubmitting, setIsSubmitting] = useState(false);
 const [message, setMessage] = useState("");
-    
+const [isMobile, setIsMobile] = useState(false);
+
+useEffect(() => {
+  const checkMobile = () => {
+    setIsMobile(window.innerWidth <= 768);
+  };
+
+  checkMobile();
+  window.addEventListener("resize", checkMobile);
+  return () => window.removeEventListener("resize", checkMobile);
+}, []);
   const services = [
     "Yard Waste",
     "Furniture Removal",
@@ -25,34 +35,34 @@ const [message, setMessage] = useState("");
     "Other",
   ];
 
-  const pageStyle = {
+const pageStyle = {
     fontFamily: "Arial, sans-serif",
     background: "linear-gradient(135deg, #0a0a0a, #151515 55%, #1d1d1d)",
     color: "white",
     minHeight: "100vh",
-  };
+};
 
-  const containerStyle = {
-    maxWidth: "1180px",
-    margin: "0 auto",
-    padding: "32px 20px 60px",
-  };
+const containerStyle = {
+  maxWidth: "1180px",
+  margin: "0 auto",
+  padding: isMobile ? "18px 14px 40px" : "32px 20px 60px",
+};
 
-  const heroStyle = {
-    display: "grid",
-    gridTemplateColumns: "1.15fr 0.85fr",
-    gap: "28px",
-    alignItems: "stretch",
-    marginBottom: "36px",
-  };
+const heroStyle = {
+  display: "grid",
+  gridTemplateColumns: isMobile ? "1fr" : "1.15fr 0.85fr",
+  gap: isMobile ? "18px" : "28px",
+  alignItems: "stretch",
+  marginBottom: "36px",
+};
 
-  const heroLeftStyle = {
-    background: "linear-gradient(145deg, rgba(24,24,24,0.95), rgba(12,12,12,0.95))",
-    border: "1px solid rgba(250, 204, 21, 0.18)",
-    borderRadius: "24px",
-    padding: "34px",
-    boxShadow: "0 20px 60px rgba(0,0,0,0.35)",
-  };
+const heroLeftStyle = {
+  background: "linear-gradient(145deg, rgba(24,24,24,0.95), rgba(12,12,12,0.95))",
+  border: "1px solid rgba(250, 204, 21, 0.18)",
+  borderRadius: "24px",
+  padding: isMobile ? "20px" : "34px",
+  boxShadow: "0 20px 60px rgba(0,0,0,0.35)",
+};
 
   const badgeStyle = {
     display: "inline-block",
@@ -67,13 +77,13 @@ const [message, setMessage] = useState("");
     letterSpacing: "0.4px",
   };
 
-  const heroRightStyle = {
-    background: "linear-gradient(145deg, rgba(26,26,26,0.95), rgba(10,10,10,0.95))",
-    border: "1px solid rgba(255,255,255,0.08)",
-    borderRadius: "24px",
-    padding: "28px",
-    boxShadow: "0 20px 60px rgba(0,0,0,0.35)",
-  };
+const heroRightStyle = {
+  background: "linear-gradient(145deg, rgba(26,26,26,0.95), rgba(10,10,10,0.95))",
+  border: "1px solid rgba(255,255,255,0.08)",
+  borderRadius: "24px",
+  padding: isMobile ? "20px" : "28px",
+  boxShadow: "0 20px 60px rgba(0,0,0,0.35)",
+};
 
   const cardStyle = {
     background: "#111",
@@ -96,12 +106,12 @@ const [message, setMessage] = useState("");
     margin: 0,
   };
 
-  const gridStyle = {
-    display: "grid",
-    gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
-    gap: "18px",
-    marginTop: "20px",
-  };
+const gridStyle = {
+  display: "grid",
+  gridTemplateColumns: isMobile ? "1fr" : "repeat(4, minmax(0, 1fr))",
+  gap: "18px",
+  marginTop: "20px",
+};
 
   const serviceCardStyle = {
     background: "linear-gradient(145deg, #171717, #101010)",
@@ -111,20 +121,20 @@ const [message, setMessage] = useState("");
     boxShadow: "0 14px 35px rgba(0,0,0,0.25)",
   };
 
-  const quoteWrapStyle = {
-    display: "grid",
-    gridTemplateColumns: "0.9fr 1.1fr",
-    gap: "28px",
-    marginTop: "38px",
-  };
+const quoteWrapStyle = {
+  display: "grid",
+  gridTemplateColumns: isMobile ? "1fr" : "0.9fr 1.1fr",
+  gap: isMobile ? "18px" : "28px",
+  marginTop: "38px",
+};
 
-  const formCardStyle = {
-    background: "linear-gradient(145deg, #171717, #0d0d0d)",
-    border: "1px solid rgba(255,255,255,0.08)",
-    borderRadius: "24px",
-    padding: "28px",
-    boxShadow: "0 18px 45px rgba(0,0,0,0.3)",
-  };
+const formCardStyle = {
+  background: "linear-gradient(145deg, #171717, #0d0d0d)",
+  border: "1px solid rgba(255,255,255,0.08)",
+  borderRadius: "24px",
+  padding: isMobile ? "20px" : "28px",
+  boxShadow: "0 18px 45px rgba(0,0,0,0.3)",
+};
 
   const inputStyle = {
     width: "100%",
@@ -157,14 +167,14 @@ const [message, setMessage] = useState("");
         <div style={heroStyle}>
           <div style={heroLeftStyle}>
             <div style={badgeStyle}>Serving Washington County</div>
-            <div style={{ position: "relative", marginBottom: "22px", paddingRight: "170px", minHeight: "140px" }}>
+            <div style={{ position: "relative", marginBottom: "22px", paddingRight: isMobile ? "0" : "170px", minHeight: isMobile ? "auto" : "140px" }}>
               <div
                 style={{
                   position: "absolute",
-                  right: "0",
-                  top: "-10px",
-                  width: "150px",
-                  height: "150px",
+                  right: isMobile ? "10px" : "0",
+                  top: isMobile ? "-6px" : "-10px",
+                  width: isMobile ? "90px" : "150px",
+                  height: isMobile ? "90px" : "150px",
                   borderRadius: "999px",
                   background: "radial-gradient(circle, rgba(250,204,21,0.26) 0%, rgba(250,204,21,0.14) 38%, rgba(250,204,21,0.04) 58%, rgba(250,204,21,0) 76%)",
                   display: "flex",
@@ -178,8 +188,8 @@ const [message, setMessage] = useState("");
                   src="/logo1.png"
                   alt="KB Junk Removal Logo"
                   style={{
-                    width: "122px",
-                    height: "122px",
+                    width: isMobile ? "68px" : "122px",
+                    height: isMobile ? "68px" : "122px",
                     objectFit: "contain",
                     borderRadius: "999px",
                     filter: "drop-shadow(0 10px 24px rgba(0,0,0,0.35))",
@@ -191,24 +201,24 @@ const [message, setMessage] = useState("");
               <h1
                 style={{
                   color: "#facc15",
-                  fontSize: "64px",
+                  fontSize: isMobile ? "42px" : "64px",
                   margin: 0,
                   fontWeight: 900,
                   lineHeight: 0.98,
                   position: "relative",
                   zIndex: 1,
-                  maxWidth: "760px",
+                  maxWidth: isMobile ? "100%" : "760px",
                   textShadow: "0 4px 18px rgba(0,0,0,0.22)",
                 }}
               >
                 KB Junk Removal
               </h1>
             </div>
-            <h2 style={{ margin: "0 0 16px", fontSize: "32px", lineHeight: 1.3, textAlign: "left", maxWidth: "760px" }}>
+            <h2 style={{ margin: "0 0 16px", fontSize: isMobile ? "24px" : "32px", lineHeight: 1.3, textAlign: "left", maxWidth: "760px" }}>
               <span style={{ color: "#facc15" }}>Reliable Junk Removal Services</span><br />
               <span style={{ color: "white", display: "inline-block", marginTop: "2px" }}>You Can Trust</span>
             </h2>
-            <p style={{ color: "#d4d4d8", fontSize: "17px", lineHeight: 1.7, maxWidth: "620px", marginBottom: "24px", textAlign: "left" }}>
+            <p style={{ color: "#d4d4d8", fontSize: isMobile ? "15px" : "17px", lineHeight: 1.7, maxWidth: "620px", marginBottom: "24px", textAlign: "left" }}>
               Fast, affordable, and dependable junk removal for homes, garages, and properties across Washington County.
             </p>
 
@@ -262,7 +272,7 @@ const [message, setMessage] = useState("");
             <div style={{ color: "#fde047", fontWeight: 800, marginBottom: "18px", letterSpacing: "0.8px", fontSize: "13px" }}>
               WHAT WE REMOVE
             </div>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "14px" }}>
+            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "14px" }}>
               {services.map((service) => (
                 <div key={service} style={cardStyle}>{service}</div>
               ))}
@@ -312,7 +322,7 @@ const [message, setMessage] = useState("");
             <p style={{ ...sectionTextStyle, maxWidth: "520px" }}>
               Serving Washington County, IL — fast, reliable, and local junk removal you can count on.
             </p>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "14px", marginTop: "20px" }}>
+            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "14px", marginTop: "20px" }}>
               {[
                 "Easy for mobile users",
                 "Quick service selection",
@@ -377,7 +387,7 @@ const data = await res.json();
 }}
   style={{ display: "flex", flexDirection: "column", gap: "16px" }}
 >
-  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "14px" }}>
+ <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "14px" }}>
     <input
       name="name"
       placeholder="Name"
@@ -396,7 +406,7 @@ const data = await res.json();
     <div style={{ fontWeight: 700, marginBottom: "10px", color: "#e4e4e7" }}>
       What do you need removed?
     </div>
-    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px" }}>
+   <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "10px" }}>
       {quoteOptions.map((item) => (
         <label
           key={item}
@@ -430,7 +440,7 @@ const data = await res.json();
     style={{ ...inputStyle, resize: "vertical" }}
   />
 
-  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "14px" }}>
+  <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: "14px" }}>
     <select
       name="contactMethod"
       style={inputStyle}
