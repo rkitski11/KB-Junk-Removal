@@ -238,7 +238,7 @@ const formCardStyle = {
                 Call (618) 367-5815
               </a>
               <a
-                href="https://www.facebook.com/share/1ArxuPRrLf/?mibextid=wwXIfr"
+                href="https://www.facebook.com/profile.php?id=61569261890557"
                 target="_blank"
                 rel="noreferrer"
                 style={{
@@ -253,7 +253,7 @@ const formCardStyle = {
                 Visit Our Facebook
               </a>
               <a
-                href="https://www.facebook.com/share/1ArxuPRrLf/?mibextid=wwXIfr"
+                href="https://www.facebook.com/profile.php?id=61569261890557"
                 target="_blank"
                 rel="noreferrer"
                 style={{
@@ -497,8 +497,8 @@ onSubmit={async (e) => {
         <footer style={{ marginTop: "50px", borderTop: "1px solid #27272a", paddingTop: "20px", textAlign: "center", color: "#a1a1aa" }}>
           <p style={{ marginBottom: "10px", fontWeight: 700 }}>Serving Washington County, IL</p>
           <div style={{ marginBottom: "10px" }}>
-            <a href="https://www.facebook.com/share/1ArxuPRrLf/?mibextid=wwXIfr" target="_blank" rel="noreferrer" style={{ color: "#3b82f6", marginRight: "10px" }}>Facebook</a>
-            <a href="https://www.facebook.com/share/1ArxuPRrLf/?mibextid=wwXIfr" target="_blank" rel="noreferrer" style={{ color: "#3b82f6" }}>Follow Us</a>
+            <a href="https://www.facebook.com/profile.php?id=61569261890557" target="_blank" rel="noreferrer" style={{ color: "#3b82f6", marginRight: "10px" }}>Facebook</a>
+            <a href="https://www.facebook.com/profile.php?id=61569261890557" target="_blank" rel="noreferrer" style={{ color: "#3b82f6" }}>Follow Us</a>
           </div>
           <p style={{ fontSize: "14px" }}>© {new Date().getFullYear()} KB Junk Removal. All rights reserved.</p>
           <p style={{ fontSize: "13px", marginTop: "8px" }}>Reliable junk removal services in Washington County, Illinois.</p>
